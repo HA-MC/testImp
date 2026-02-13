@@ -17,6 +17,49 @@
             "capitalGainsTax": 0.25,
             "dividendTax": 0.30,
             "startupRate": 0.15,
+            "incentives": {
+                "rdTaxCredit": {
+                    "rate": 0.30,
+                    "description": "Crédit d'Impôt Recherche (CIR) - 30% de gastos I+D elegibles hasta €100M",
+                    "maxAmount": 100000000,
+                    "url": "https://www.impots.gouv.fr/portail/professionnel/le-credit-dimpot-recherche-cir"
+                },
+                "startupExemptions": {
+                    "jeune": "Exonération Jeune Entreprise Innovante - hasta 100% primeros 8 años",
+                    "url": "https://www.service-public.fr/professionnels/vosdroits/F31188"
+                },
+                "patentBox": {
+                    "rate": 0.10,
+                    "description": "Régimen de patentes - tasa reducida 10% sobre ingresos IP",
+                    "url": "https://www.impots.gouv.fr/"
+                }
+            },
+            "doubleTaxTreaties": {
+                "countries": [
+                    "USA",
+                    "UK",
+                    "DE",
+                    "SG",
+                    "AE",
+                    "CA",
+                    "ES",
+                    "IT",
+                    "NL",
+                    "JP",
+                    "CN",
+                    "IN",
+                    "BR",
+                    "MX"
+                ],
+                "count": 125,
+                "withholding": {
+                    "dividends": 0.05,
+                    "interest": 0,
+                    "royalties": 0.05
+                },
+                "url": "https://www.impots.gouv.fr/portail/international"
+            },
+            "effectiveRateContext": "Con CIR y régimen Patent Box, empresas Tech pueden reducir tasa efectiva a 15-18%. JEI permite 0% hasta 8 años.",
             "source": {
                 "url": "https://www.impots.gouv.fr/professionnel/limpot-sur-les-societes",
                 "name": "Direction Générale des Finances Publiques (DGFIP)",
@@ -139,13 +182,52 @@
             "capitalGainsTax": 0,
             "dividendTax": 0,
             "startupRate": 0.085,
+            "incentives": {
+                "rdTaxCredit": {
+                    "rate": 0.40,
+                    "description": "Productivity and Innovation Credit (PIC) - hasta 400% deduction en I+D",
+                    "url": "https://www.iras.gov.sg/taxes/corporate-income-tax/specific-topics/tax-incentives"
+                },
+                "startupExemptions": {
+                    "startup": "Tax Exemption for Startups - 75% primeros SGD 100k, 50% siguientes SGD 100k",
+                    "url": "https://www.iras.gov.sg/taxes/corporate-income-tax/basics-of-corporate-income-tax/tax-exemption-schemes"
+                },
+                "patentBox": {
+                    "rate": 0.05,
+                    "description": "Régimen IP - tasa preferencial 5% ingresos por IP calificada",
+                    "url": "https://www.iras.gov.sg/"
+                }
+            },
+            "doubleTaxTreaties": {
+                "countries": [
+                    "USA",
+                    "UK",
+                    "DE",
+                    "FR",
+                    "AE",
+                    "CA",
+                    "CN",
+                    "IN",
+                    "JP",
+                    "AU",
+                    "NL",
+                    "CH"
+                ],
+                "count": 92,
+                "withholding": {
+                    "dividends": 0,
+                    "interest": 0.10,
+                    "royalties": 0.10
+                },
+                "url": "https://www.iras.gov.sg/taxes/international-tax"
+            },
+            "effectiveRateContext": "Con 0% capital gains y dividends tax-exempt, tasa efectiva para inversores 8.5-17%. Incentivos adicionales reducen hasta 5%.",
             "source": {
                 "url": "https://www.iras.gov.sg/",
                 "name": "Inland Revenue Authority of Singapore (IRAS)",
                 "country": "Singapur"
             },
-            "verified": "2026-02-13",
-            "notes": "0% capital gains, 0% dividendos (sistema one-tier)"
+            "verified": "2026-02-13"
         },
         "DUBAI": {
             "city": "Dubái",
@@ -161,13 +243,51 @@
             "capitalGainsTax": 0,
             "dividendTax": 0,
             "startupRate": 0,
+            "incentives": {
+                "freeZones": {
+                    "rate": 0,
+                    "description": "Free Trade Zones - 0% corporate tax hasta 2053 para empresas calificadas",
+                    "zones": [
+                        "DIFC",
+                        "DMCC",
+                        "JAFZA",
+                        "DWC"
+                    ],
+                    "url": "https://mof.gov.ae/corporate-tax/"
+                },
+                "startupExemptions": {
+                    "smallBusiness": "Small Business Relief - 0% tax primeros AED 375,000 profit",
+                    "url": "https://mof.gov.ae/"
+                }
+            },
+            "doubleTaxTreaties": {
+                "countries": [
+                    "USA",
+                    "UK",
+                    "FR",
+                    "DE",
+                    "SG",
+                    "CA",
+                    "IN",
+                    "CN",
+                    "JP",
+                    "ES"
+                ],
+                "count": 135,
+                "withholding": {
+                    "dividends": 0,
+                    "interest": 0,
+                    "royalties": 0
+                },
+                "url": "https://mof.gov.ae/tax-treaties/"
+            },
+            "effectiveRateContext": "En Free Zones: 0% total tax. Fuera de FZ: 0% hasta AED 375k, 9% excedente. 0% capital gains y dividends en todos los casos.",
             "source": {
                 "url": "https://mof.gov.ae/",
                 "name": "Ministry of Finance UAE",
                 "country": "EAU"
             },
-            "verified": "2026-02-13",
-            "notes": "0% capital gains, 0% dividendos, Free Zones con 0%"
+            "verified": "2026-02-13"
         },
         "NEW_YORK": {
             "city": "Nueva York",

@@ -1,6 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { searchBusinesses } from './api';
 import { TAX_DATA, GLOBAL_COMPARISON, calculateCorporateTax, calculateTotalTaxBurden } from './taxEngine';
+import SideBySideComparison from './components/SideBySideComparison';
+import ProSimulator from './components/ProSimulator';
+import generateInvestmentReport from './components/ReportExporter';
+
 
 const TaxCard = ({ tax }) => (
   <div className="tax-item">
@@ -238,14 +242,32 @@ const GlobalInvestorComparison = () => {
     </div>;
   }
 
+  const handleExportReport = async () => {
+    const reportData = {
+      investmentAmount,
+      insights,
+      sortedData,
+      jurisdictionsCount: Object.keys(taxData.jurisdictions).length,
+      lastUpdate: taxData.lastUpdate
+    };
+    await generateInvestmentReport(reportData);
+  };
+
   return (
     <div className="comparison-container">
-      <h2 style={{ textAlign: 'center', marginBottom: '0.5rem', color: 'var(--accent)' }}>
-        📊 Dashboard de Análisis Fiscal Global
-      </h2>
-      <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
-        Métricas confiables para decisiones de inversión
-      </p>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <div>
+          <h2 style={{ textAlign: 'left', marginBottom: '0.5rem', color: 'var(--accent)' }}>
+            📊 Dashboard de Análisis Fiscal Global
+          </h2>
+          <p style={{ textAlign: 'left', color: 'var(--text-muted)', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+            Métricas confiables para decisiones de inversión
+          </p>
+        </div>
+        <button onClick={handleExportReport} className="export-btn">
+          📄 Export PDF Report
+        </button>
+      </div>
       <div style={{ textAlign: 'center', marginBottom: '2rem', fontSize: '0.7rem', color: 'var(--text-muted)', fontStyle: 'italic' }}>
         📅 Última actualización: {new Date(taxData.lastUpdate).toLocaleString('es-ES')}
       </div>
@@ -388,6 +410,19 @@ function App() {
   const [selectedCompany, setSelectedCompany] = useState(null);
   const [loading, setLoading] = useState(false);
   const [simulatedProfit, setSimulatedProfit] = useState(50000);
+  const [taxData, setTaxData] = useState(null);
+
+  // Load tax data for institutional components
+  React.useEffect(() => {
+    fetch('/api/tax-data')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.jurisdictions) {
+          setTaxData(data);
+        }
+      })
+      .catch(err => console.error('Error loading tax data:', err));
+  }, []);
 
   const handleSearch = async () => {
     if (!query) return;
@@ -415,6 +450,12 @@ function App() {
       <div className="tab-navigation">
         <button className={`tab-btn ${activeTab === 'global' ? 'active' : ''}`} onClick={() => setActiveTab('global')}>
           🌍 Dashboard Global
+        </button>
+        <button className={`tab-btn ${activeTab === 'comparison' ? 'active' : ''}`} onClick={() => setActiveTab('comparison')}>
+          ⚡ Side-by-Side
+        </button>
+        <button className={`tab-btn ${activeTab === 'simulator' ? 'active' : ''}`} onClick={() => setActiveTab('simulator')}>
+          📊 Pro Simulator
         </button>
         <button className={`tab-btn ${activeTab === 'europe' ? 'active' : ''}`} onClick={() => setActiveTab('europe')}>
           🇪🇺 Europa
@@ -500,6 +541,8 @@ function App() {
 
       {activeTab === 'europe' && <EUComparisonTable />}
       {activeTab === 'global' && <GlobalInvestorComparison />}
+      {activeTab === 'comparison' && <SideBySideComparison taxData={taxData} />}
+      {activeTab === 'simulator' && <ProSimulator taxData={taxData} />}
 
       <footer style={{ marginTop: '4rem', textAlign: 'center', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
         <p>© 2026 TaxCompass Analytics — Data-driven tax intelligence for global investors</p>
