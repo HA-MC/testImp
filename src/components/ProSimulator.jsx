@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Professional Investment Simulator with Sector-Based Calculations
@@ -36,6 +37,7 @@ const SECTORS = {
 };
 
 export const ProSimulator = ({ taxData }) => {
+    const { t } = useTranslation();
     const [sector, setSector] = useState('TECH');
     const [revenue, setRevenue] = useState(10000000);
     const [costRatio, setCostRatio] = useState(0.60); // 60% costs
@@ -155,25 +157,25 @@ export const ProSimulator = ({ taxData }) => {
     return (
         <div className="pro-simulator-container">
             <div className="simulator-header">
-                <h2>📊 Professional Investment Simulator</h2>
-                <div className="simulator-subtitle">Sector-based net-of-tax profit analysis</div>
+                <h2>📊 {t('simulator.title')}</h2>
+                <div className="simulator-subtitle">{t('simulator.subtitle')}</div>
             </div>
 
             {/* Configuration Panel */}
             <div className="simulator-config">
                 <div className="config-row">
                     <div className="config-group">
-                        <label>Sector</label>
+                        <label>{t('simulator.sector')}</label>
                         <select value={sector} onChange={(e) => setSector(e.target.value)} className="simulator-select">
                             {Object.entries(SECTORS).map(([key, config]) => (
-                                <option key={key} value={key}>{config.label}</option>
+                                <option key={key} value={key}>{t(`sectors.${key.toLowerCase()}`)}</option>
                             ))}
                         </select>
-                        <div className="config-hint">{sectorConfig.description}</div>
+                        <div className="config-hint">{t(`sectors.${sector.toLowerCase()}Desc`)}</div>
                     </div>
 
                     <div className="config-group">
-                        <label>Jurisdiction</label>
+                        <label>{t('comparison.jurisdiction')}</label>
                         <select
                             value={selectedJurisdiction}
                             onChange={(e) => setSelectedJurisdiction(e.target.value)}
@@ -188,7 +190,7 @@ export const ProSimulator = ({ taxData }) => {
 
                 <div className="config-row">
                     <div className="config-group">
-                        <label>Annual Revenue</label>
+                        <label>{t('simulator.annualRevenue')}</label>
                         <input
                             type="number"
                             value={revenue}
@@ -198,7 +200,7 @@ export const ProSimulator = ({ taxData }) => {
                     </div>
 
                     <div className="config-group">
-                        <label>Operating Cost Ratio</label>
+                        <label>{t('simulator.operatingCosts')}</label>
                         <input
                             type="range"
                             min="0"
@@ -212,7 +214,7 @@ export const ProSimulator = ({ taxData }) => {
                     </div>
 
                     <div className="config-group">
-                        <label>Dividend Distribution</label>
+                        <label>{t('simulator.dividendDistribution')}</label>
                         <input
                             type="range"
                             min="0"
@@ -229,15 +231,15 @@ export const ProSimulator = ({ taxData }) => {
 
             {/* P&L Waterfall */}
             <div className="simulator-waterfall">
-                <h3>Profit & Loss Waterfall</h3>
+                <h3>{t('simulator.waterfall')}</h3>
                 <div className="waterfall-steps">
                     <WaterfallStep
-                        label="Gross Revenue"
+                        label={t('simulator.grossRevenue')}
                         value={calculations.grossRevenue}
                         type="revenue"
                     />
                     <WaterfallStep
-                        label="Operating Costs"
+                        label={t('simulator.operatingCosts')}
                         value={-calculations.operatingCosts}
                         type="cost"
                     />
@@ -245,50 +247,51 @@ export const ProSimulator = ({ taxData }) => {
                         label="EBITDA"
                         value={calculations.ebitda}
                         type="profit"
-                        margin={`${calculations.ebitdaMargin.toFixed(1)}% margin`}
+                        margin={`${calculations.ebitdaMargin.toFixed(1)}% ${t('simulator.margin')}`}
                     />
                     <WaterfallStep
-                        label="Depreciation"
+                        label={t('simulator.depreciation')}
                         value={-calculations.depreciation}
                         type="cost"
                     />
                     <WaterfallStep
-                        label="EBIT (Taxable Profit)"
+                        label={t('simulator.ebit')}
                         value={calculations.ebit}
                         type="profit"
                     />
                     <WaterfallStep
-                        label="Corporate Tax"
+                        label={t('comparison.corporateTax')}
                         value={-calculations.netCorporateTax}
                         type="tax"
                     />
                     {calculations.taxCredits > 0 && (
                         <WaterfallStep
-                            label={`Tax Credits (${sector})`}
+                            label={`${t('comparison.taxIncentives')} (${sector})`}
                             value={calculations.taxCredits}
                             type="credit"
                         />
                     )}
                     <WaterfallStep
-                        label="Net Profit"
+                        label={t('simulator.netProfit')}
                         value={calculations.netProfitBeforeDistribution}
                         type="profit"
                     />
                     <WaterfallStep
-                        label="Dividend Tax"
+                        label={t('comparison.dividends')}
                         value={-calculations.dividendTax}
                         type="tax"
                     />
                     <WaterfallStep
-                        label="Capital Gains Tax (on exit)"
+                        label={t('comparison.capitalGains')}
                         value={-calculations.capitalGainsTax}
                         type="tax"
                     />
                     <WaterfallStep
-                        label="Final Net-of-Tax Profit"
+                        label={t('simulator.finalNetProfit')}
                         value={calculations.finalNetProfit}
                         type="final"
                         highlight
+                        t={t}
                     />
                 </div>
             </div>
@@ -296,19 +299,19 @@ export const ProSimulator = ({ taxData }) => {
             {/* Summary KPIs */}
             <div className="simulator-kpis">
                 <div className="sim-kpi">
-                    <div className="sim-kpi-label">Total Tax Burden</div>
+                    <div className="sim-kpi-label">{t('comparison.totalBurden')}</div>
                     <div className="sim-kpi-value tax">${calculations.totalTaxes.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
                 </div>
                 <div className="sim-kpi">
-                    <div className="sim-kpi-label">Effective Tax Rate</div>
+                    <div className="sim-kpi-label">{t('comparison.effectiveRate')}</div>
                     <div className="sim-kpi-value">{calculations.effectiveTaxRate.toFixed(2)}%</div>
                 </div>
                 <div className="sim-kpi">
-                    <div className="sim-kpi-label">Net Return on Revenue</div>
-                    <div className="sim- kpi-value profit">{calculations.returnOnRevenue.toFixed(2)}%</div>
+                    <div className="sim-kpi-label">{t('simulator.netReturn')}</div>
+                    <div className="sim-kpi-value profit">{calculations.returnOnRevenue.toFixed(2)}%</div>
                 </div>
                 <div className="sim-kpi">
-                    <div className="sim-kpi-label">Tax Credits Applied</div>
+                    <div className="sim-kpi-label">{t('simulator.taxCreditsApplied')}</div>
                     <div className="sim-kpi-value credit">${calculations.taxCredits.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
                 </div>
             </div>
@@ -316,8 +319,8 @@ export const ProSimulator = ({ taxData }) => {
             {/* Sector-specific insights */}
             {sector === 'TECH' && jurisdiction.incentives?.rdTaxCredit && (
                 <div className="sector-insight tech">
-                    <strong>💡 Tech Advantage:</strong> R&D Credit of {jurisdiction.incentives.rdTaxCredit.rate * 100}%
-                    saved ${calculations.taxCredits.toLocaleString()} in taxes
+                    <strong>💡 {t('simulator.techAdvantage')}:</strong> {t('comparison.rdCredit')} {t('comparison.of')} {jurisdiction.incentives.rdTaxCredit.rate * 100}%
+                    {t('simulator.saved')} ${calculations.taxCredits.toLocaleString()} {t('simulator.inTaxes')}
                 </div>
             )}
         </div>
@@ -325,7 +328,7 @@ export const ProSimulator = ({ taxData }) => {
 };
 
 // Sub-component
-const WaterfallStep = ({ label, value, type, margin, highlight }) => {
+const WaterfallStep = ({ label, value, type, margin, highlight, t }) => {
     const getColor = () => {
         if (type === 'revenue') return '#10b981';
         if (type === 'profit') return '#3b82f6';

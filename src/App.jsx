@@ -9,15 +9,15 @@ import LanguageSelector from './components/LanguageSelector';
 import './components/LanguageSelector.css';
 
 
-const TaxCard = ({ tax }) => (
+const TaxCard = ({ tax, t }) => (
   <div className="tax-item">
     <div className="tax-header">
       <span className="tax-title">{tax.name}</span>
-      <span className="tax-badge">Official Data</span>
+      <span className="tax-badge">Data</span>
     </div>
     <p className="tax-desc">{tax.description}</p>
     <a href={tax.source} target="_blank" rel="noopener noreferrer" className="source-link">
-      📄 Fuente: {tax.source.split('/')[2]} ↗
+      📄 Source: {tax.source.split('/')[2]} ↗
     </a>
   </div>
 );
@@ -36,7 +36,7 @@ const BarChart = ({ label, value, maxValue, color }) => {
   );
 };
 
-const StackedBarChart = ({ label, corporate, capitalGains, dividends, maxValue }) => {
+const StackedBarChart = ({ label, corporate, capitalGains, dividends, maxValue, t }) => {
   const total = corporate + capitalGains + dividends;
   const corpPct = (corporate / maxValue) * 100;
   const capPct = (capitalGains / maxValue) * 100;
@@ -57,7 +57,7 @@ const StackedBarChart = ({ label, corporate, capitalGains, dividends, maxValue }
             {dividends > 3 && <span className="bar-value">{dividends.toFixed(1)}%</span>}
           </div>
         </div>
-        <div className="bar-total">{total.toFixed(1)}% total</div>
+        <div className="bar-total">{total.toFixed(1)}% {t('comparison.total').toLowerCase()}</div>
       </div>
     </div>
   );
@@ -79,13 +79,14 @@ const getColorByValue = (value, max, reverse = false) => {
 };
 
 const EUComparisonTable = () => {
+  const { t } = useTranslation();
   const euCities = ['PARIS', 'MADRID', 'BERLIN', 'LONDON', 'AMSTERDAM', 'ROME'];
   const cities = euCities.map(key => GLOBAL_COMPARISON[key]);
 
   return (
     <div className="comparison-container">
       <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: 'var(--accent)' }}>
-        📊 Comparativa de Impuestos entre Capitales Europeas
+        📊 {t('europe.title', 'European Tax Comparison')}
       </h2>
       <div className="comparison-grid">
         {cities.map((city, idx) => (
@@ -95,30 +96,30 @@ const EUComparisonTable = () => {
               <span className="country-badge">{city.country}</span>
             </div>
             <div className="metric-group">
-              <div className="metric-label">Impuesto de Sociedades</div>
+              <div className="metric-label">{t('comparison.corporateTax')}</div>
               <div className="metric-value">{(city.corporateTax.standard * 100).toFixed(1)}%</div>
               <div className="metric-desc">{city.corporateTax.description}</div>
             </div>
             <div className="metric-group">
-              <div className="metric-label">IVA Estándar</div>
+              <div className="metric-label">{t('simulator.vat', 'Standard VAT')}</div>
               <div className="metric-value">{(city.vat.standard * 100).toFixed(1)}%</div>
             </div>
             <div className="metric-group">
-              <div className="metric-label">Tasa Startups</div>
+              <div className="metric-label">{t('comparison.startupRate', 'Startup Rate')}</div>
               <div className="metric-value">{(city.startupRate * 100).toFixed(1)}%</div>
             </div>
             <div className="source-section">
               <a href={city.source} target="_blank" rel="noopener noreferrer" className="source-link">
                 🔗 {city.source.split('/')[2]}
               </a>
-              <div className="api-source">API/Datos: {city.apiSource}</div>
+              <div className="api-source">API/Data: {city.apiSource}</div>
             </div>
           </div>
         ))}
       </div>
 
       <div className="chart-section">
-        <h3 style={{ marginBottom: '1.5rem', textAlign: 'center' }}>Gráfica - Impuesto de Sociedades Estándar</h3>
+        <h3 style={{ marginBottom: '1.5rem', textAlign: 'center' }}>{t('charts.corporateTitle', 'Corporate Tax Rate Comparison')}</h3>
         <div className="chart-container">
           {cities.map((city, idx) => (
             <BarChart key={idx} label={city.city} value={city.corporateTax.standard * 100} maxValue={35} color={`hsl(${idx * 60}, 70%, 60%)`} />
@@ -280,23 +281,23 @@ const GlobalInvestorComparison = () => {
       {insights && (
         <div className="kpi-dashboard">
           <div className="kpi-card best">
-            <div className="kpi-label">🏆 Menor Carga Fiscal</div>
+            <div className="kpi-label">🏆 {t('kpis.lowestBurden')}</div>
             <div className="kpi-value">{insights.best.city}</div>
-            <div className="kpi-detail">{insights.best.burden.effectiveRate.toFixed(2)}% efectivo</div>
+            <div className="kpi-detail">{insights.best.burden.effectiveRate.toFixed(2)}% {t('kpis.effective')}</div>
           </div>
           <div className="kpi-card">
-            <div className="kpi-label">💰 Ahorro Potencial</div>
+            <div className="kpi-label">💰 {t('kpis.potentialSavings')}</div>
             <div className="kpi-value">${insights.savings.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
-            <div className="kpi-detail">vs {insights.worst.city}</div>
+            <div className="kpi-detail">{t('kpis.vs')} {insights.worst.city}</div>
           </div>
           <div className="kpi-card">
-            <div className="kpi-label">📈 0% Capital Gains</div>
-            <div className="kpi-value">{insights.zeroCapGains.length} países</div>
+            <div className="kpi-label">📈 {t('kpis.zeroCapGains')}</div>
+            <div className="kpi-value">{insights.zeroCapGains.length} {t('kpis.countries')}</div>
             <div className="kpi-detail">{insights.zeroCapGains.map(d => d.city).join(', ')}</div>
           </div>
           <div className="kpi-card">
-            <div className="kpi-label">💵 0% Dividendos</div>
-            <div className="kpi-value">{insights.zeroDividends.length} países</div>
+            <div className="kpi-label">💵 {t('kpis.zeroDividends')}</div>
+            <div className="kpi-value">{insights.zeroDividends.length} {t('kpis.countries')}</div>
             <div className="kpi-detail">{insights.zeroDividends.map(d => d.city).join(', ')}</div>
           </div>
         </div>
@@ -304,9 +305,9 @@ const GlobalInvestorComparison = () => {
 
       {/* Investment Calculator */}
       <div className="glass-card" style={{ marginBottom: '2rem' }}>
-        <h3 style={{ marginBottom: '1rem', color: 'var(--accent)' }}>💰 Simulador de Inversión</h3>
+        <h3 style={{ marginBottom: '1rem', color: 'var(--accent)' }}>💰 {t('simulator.title')}</h3>
         <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-          Capital / Beneficio Anual (USD/EUR):
+          {t('simulator.capital')}
         </label>
         <input
           type="number"
@@ -318,27 +319,27 @@ const GlobalInvestorComparison = () => {
 
       {/* Sortable Table */}
       <div className="data-table-container">
-        <h3 style={{ marginBottom: '1rem', color: 'var(--accent)', textAlign: 'center' }}>📋 Tabla Comparativa (Click para ordenar)</h3>
+        <h3 style={{ marginBottom: '1rem', color: 'var(--accent)', textAlign: 'center' }}>📋 {t('table.title')}</h3>
         <div className="table-wrapper">
           <table className="data-table">
             <thead>
               <tr>
                 <th onClick={() => handleSort('city')} className="sortable">
-                  Ciudad {sortConfig.key === 'city' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
+                  {t('table.city')} {sortConfig.key === 'city' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
                 </th>
                 <th onClick={() => handleSort('corporateTax')} className="sortable">
-                  IS {sortConfig.key === 'corporateTax' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
+                  {t('table.corporateTax')} {sortConfig.key === 'corporateTax' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
                 </th>
                 <th onClick={() => handleSort('capitalGainsTax')} className="sortable">
-                  Cap. Gains {sortConfig.key === 'capitalGainsTax' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
+                  {t('table.capitalGains')} {sortConfig.key === 'capitalGainsTax' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
                 </th>
                 <th onClick={() => handleSort('dividendTax')} className="sortable">
-                  Dividendos {sortConfig.key === 'dividendTax' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
+                  {t('table.dividends')} {sortConfig.key === 'dividendTax' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
                 </th>
                 <th onClick={() => handleSort('effectiveRate')} className="sortable">
-                  Tasa Efectiva {sortConfig.key === 'effectiveRate' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
+                  {t('table.effectiveRate')} {sortConfig.key === 'effectiveRate' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
                 </th>
-                <th>Carga Total</th>
+                <th>{t('table.totalBurden')}</th>
               </tr>
             </thead>
             <tbody>
@@ -372,11 +373,11 @@ const GlobalInvestorComparison = () => {
 
       {/* Stacked Bar Chart */}
       <div className="chart-section" style={{ marginTop: '3rem' }}>
-        <h3 style={{ marginBottom: '1rem', textAlign: 'center' }}>Desglose de Carga Tributaria</h3>
+        <h3 style={{ marginBottom: '1rem', textAlign: 'center' }}>{t('charts.title')}</h3>
         <div style={{ marginBottom: '1rem', textAlign: 'center', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-          <span style={{ backgroundColor: '#6366f1', padding: '0.25rem 0.5rem', borderRadius: '4px', marginRight: '0.5rem' }}>■ IS</span>
-          <span style={{ backgroundColor: '#a855f7', padding: '0.25rem 0.5rem', borderRadius: '4px', marginRight: '0.5rem' }}>■ Cap. Gains</span>
-          <span style={{ backgroundColor: '#22d3ee', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>■ Dividendos</span>
+          <span style={{ backgroundColor: '#6366f1', padding: '0.25rem 0.5rem', borderRadius: '4px', marginRight: '0.5rem' }}>■ {t('charts.legend.corporateTax')}</span>
+          <span style={{ backgroundColor: '#a855f7', padding: '0.25rem 0.5rem', borderRadius: '4px', marginRight: '0.5rem' }}>■ {t('charts.legend.capitalGains')}</span>
+          <span style={{ backgroundColor: '#22d3ee', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>■ {t('charts.legend.dividends')}</span>
         </div>
         <div className="chart-container">
           {sortedData.map((item, idx) => {
@@ -391,6 +392,7 @@ const GlobalInvestorComparison = () => {
                 capitalGains={capRate}
                 dividends={divRate}
                 maxValue={60}
+                t={t}
               />
             );
           })}
@@ -408,7 +410,7 @@ const GlobalInvestorComparison = () => {
 };
 
 function App() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState('global');
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
@@ -416,6 +418,11 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [simulatedProfit, setSimulatedProfit] = useState(50000);
   const [taxData, setTaxData] = useState(null);
+
+  // Handle RTL for Arabic
+  React.useEffect(() => {
+    document.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  }, [i18n.language]);
 
   // Load tax data for institutional components
   React.useEffect(() => {
@@ -481,13 +488,13 @@ function App() {
             <div className="search-container">
               <input
                 type="text"
-                placeholder="Introduce nombre de empresa o SIREN..."
+                placeholder={t('france.placeholder')}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
               />
               <button className="btn-search" onClick={handleSearch} disabled={loading}>
-                {loading ? 'Buscando...' : 'Buscar'}
+                {loading ? t('france.searching') : t('france.search_button')}
               </button>
             </div>
 
@@ -504,7 +511,7 @@ function App() {
 
             {selectedCompany && (
               <div style={{ marginTop: '2rem', borderTop: '1px solid var(--glass-border)', paddingTop: '1.5rem' }}>
-                <h2 style={{ color: 'var(--accent)', marginBottom: '1rem' }}>Detalles: {selectedCompany.nom_complet}</h2>
+                <h2 style={{ color: 'var(--accent)', marginBottom: '1rem' }}>{selectedCompany.nom_complet}</h2>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.9rem' }}>
                   <div><strong>SIREN:</strong> {selectedCompany.siren}</div>
                   <div><strong>Sede:</strong> {selectedCompany.siege.libelle_commune}</div>
@@ -515,19 +522,19 @@ function App() {
             )}
           </div>
 
-          <h2 style={{ marginBottom: '1.5rem', textAlign: 'center' }}>Tasas Francia (2024/2025)</h2>
+          <h2 style={{ marginBottom: '1.5rem', textAlign: 'center' }}>{t('france.taxRates')}</h2>
           <div className="tax-grid">
-            <TaxCard tax={TAX_DATA.CORPORATE_TAX} />
-            <TaxCard tax={TAX_DATA.VAT} />
-            <TaxCard tax={TAX_DATA.MICRO_ENTREPRENEUR} />
-            <TaxCard tax={TAX_DATA.CFE} />
+            <TaxCard tax={TAX_DATA.CORPORATE_TAX} t={t} />
+            <TaxCard tax={TAX_DATA.VAT} t={t} />
+            <TaxCard tax={TAX_DATA.MICRO_ENTREPRENEUR} t={t} />
+            <TaxCard tax={TAX_DATA.CFE} t={t} />
           </div>
 
           <div className="glass-card" style={{ marginTop: '3rem' }}>
-            <h2 style={{ marginBottom: '1.5rem', color: 'var(--accent)' }}>Simulador IS</h2>
+            <h2 style={{ marginBottom: '1.5rem', color: 'var(--accent)' }}>{t('france.simulatorTitle')}</h2>
             <div style={{ marginBottom: '1.5rem' }}>
               <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>
-                Beneficio anual estimado (€):
+                {t('france.estimatedProfit')}
               </label>
               <input
                 type="number"
@@ -537,12 +544,12 @@ function App() {
               />
             </div>
             <div className="summary-box">
-              <div style={{ color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Impuesto Estimado</div>
+              <div style={{ color: 'var(--text-muted)', marginBottom: '0.5rem' }}>{t('france.estimatedTax')}</div>
               <div style={{ fontSize: '2.5rem', fontWeight: '700', color: 'white' }}>
                 {calculatedIS.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}
               </div>
               <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>
-                15% hasta €42.500, 25% resto
+                {t('france.taxFormula')}
               </div>
             </div>
           </div>
@@ -555,7 +562,7 @@ function App() {
       {activeTab === 'simulator' && <ProSimulator taxData={taxData} />}
 
       <footer style={{ marginTop: '4rem', textAlign: 'center', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-        <p>© 2026 TaxCompass Analytics — Data-driven tax intelligence for global investors</p>
+        <p>{t('footer.copyright')}</p>
       </footer>
     </div>
   );
