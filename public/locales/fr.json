@@ -1,0 +1,119 @@
+{
+    "app": {
+        "title": "TaxCompass Analytics",
+        "subtitle": "Plateforme d'intelligence fiscale basée sur les données pour les décisions d'investissement mondiales"
+    },
+    "tabs": {
+        "global": "Tableau de Bord Global",
+        "sideBySide": "Comparaison Côte-à-Côte",
+        "simulator": "Simulateur Pro",
+        "europe": "Europe",
+        "searchFrance": "Recherche France"
+    },
+    "dashboard": {
+        "title": "Tableau de Bord d'Analyse Fiscale Globale",
+        "subtitle": "Métriques fiables pour les décisions d'investissement",
+        "lastUpdate": "Dernière mise à jour",
+        "exportPDF": "Exporter Rapport PDF",
+        "loading": "Chargement des données fiscales officielles...",
+        "error": "Erreur de chargement des données"
+    },
+    "kpis": {
+        "lowestBurden": "Charge Fiscale la Plus Faible",
+        "potentialSavings": "Économies Potentielles",
+        "zeroCapGains": "0% Plus-Values",
+        "zeroDividends": "0% Dividendes",
+        "countries": "pays",
+        "vs": "vs",
+        "effective": "effectif"
+    },
+    "simulator": {
+        "title": "Simulateur d'Investissement",
+        "capital": "Capital / Bénéfice Annuel (USD/EUR)",
+        "sector": "Secteur",
+        "jurisdiction": "Juridiction",
+        "revenue": "Chiffre d'Affaires Annuel",
+        "costRatio": "Ratio de Coûts d'Exploitation",
+        "distribution": "Distribution de Dividendes",
+        "waterfall": "Cascade de Profits et Pertes",
+        "grossRevenue": "Chiffre d'Affaires Brut",
+        "operatingCosts": "Coûts d'Exploitation",
+        "ebitda": "EBITDA",
+        "depreciation": "Amortissement",
+        "ebit": "EBIT (Bénéfice Imposable)",
+        "corporateTax": "Impôt sur les Sociétés",
+        "taxCredits": "Crédits d'Impôt",
+        "netProfit": "Bénéfice Net",
+        "dividendTax": "Impôt sur les Dividendes",
+        "capitalGainsTax": "Impôt sur les Plus-Values (à la sortie)",
+        "finalProfit": "Bénéfice Final Net d'Impôt",
+        "totalTaxBurden": "Charge Fiscale Totale",
+        "effectiveRate": "Taux d'Imposition Effectif",
+        "netReturn": "Rendement Net sur le CA",
+        "creditsApplied": "Crédits d'Impôt Appliqués"
+    },
+    "sectors": {
+        "tech": "Technologie et Logiciels",
+        "techDesc": "Logiciels, SaaS, services IT - Forte intensité R&D",
+        "realEstate": "Immobilier",
+        "realEstateDesc": "Développement immobilier commercial et résidentiel",
+        "industrial": "Industriel et Manufacturier",
+        "industrialDesc": "Fabrication, industrie lourde, production",
+        "financial": "Services Financiers",
+        "financialDesc": "Banque, investissement, assurance"
+    },
+    "comparison": {
+        "title": "Analyse Comparative de Terminal",
+        "subtitle": "Comparaison côte-à-côte de qualité institutionnelle",
+        "investmentAmount": "Montant de l'Investissement (USD)",
+        "jurisdictionA": "Juridiction A",
+        "jurisdictionB": "Juridiction B",
+        "vs": "VS",
+        "delta": "ΔDELTA",
+        "corporateTax": "Impôt sur les Sociétés",
+        "capitalGains": "Plus-Values",
+        "dividends": "Dividendes",
+        "totalBurden": "Charge Fiscale Totale",
+        "effectiveRate": "Taux Effectif",
+        "total": "Total",
+        "taxIncentives": "Incitations Fiscales",
+        "rdCredit": "Crédit R&D",
+        "taxTreaties": "Conventions Fiscales",
+        "withholding": "Retenue",
+        "saves": "économise",
+        "costsMore": "coûte plus",
+        "equivalent": "Charge fiscale équivalente"
+    },
+    "table": {
+        "title": "Tableau Comparatif (Cliquer pour trier)",
+        "city": "Ville",
+        "corporateTax": "IS",
+        "capitalGains": "Plus-Values",
+        "dividends": "Dividendes",
+        "effectiveRate": "Taux Effectif",
+        "totalBurden": "Charge Totale"
+    },
+    "charts": {
+        "title": "Décomposition de la Charge Fiscale",
+        "legend": {
+            "corporateTax": "IS",
+            "capitalGains": "Plus-Values",
+            "dividends": "Dividendes"
+        }
+    },
+    "footer": {
+        "copyright": "© 2026 TaxCompass Analytics — Intelligence fiscale basée sur les données pour les investisseurs mondiaux",
+        "sources": "Sources officielles vérifiées | Données mises à jour automatiquement | Informations fiables pour les décisions d'entreprise"
+    },
+    "france": {
+        "search": "Rechercher des entreprises françaises",
+        "placeholder": "Entrez le nom de l'entreprise ou le SIREN...",
+        "searching": "Recherche...",
+        "search_button": "Rechercher",
+        "taxRates": "Taux d'Imposition France (2024/2025)",
+        "simulatorTitle": "Simulateur IS",
+        "estimatedProfit": "Bénéfice annuel estimé (€)",
+        "estimatedTax": "Impôt Estimé",
+        "taxFormula": "15% jusqu'à 42 500 €, 25% au-delà"
+    }
+}

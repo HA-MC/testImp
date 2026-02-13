@@ -1,0 +1,119 @@
+{
+    "app": {
+        "title": "TaxCompass Analytics",
+        "subtitle": "Plataforma de inteligencia fiscal basada en datos para decisiones de inversión globales"
+    },
+    "tabs": {
+        "global": "Dashboard Global",
+        "sideBySide": "Comparación Lado-a-Lado",
+        "simulator": "Simulador Pro",
+        "europe": "Europa",
+        "searchFrance": "Búsqueda Francia"
+    },
+    "dashboard": {
+        "title": "Dashboard de Análisis Fiscal Global",
+        "subtitle": "Métricas confiables para decisiones de inversión",
+        "lastUpdate": "Última actualización",
+        "exportPDF": "Exportar Informe PDF",
+        "loading": "Cargando datos fiscales oficiales...",
+        "error": "Error al cargar datos"
+    },
+    "kpis": {
+        "lowestBurden": "Menor Carga Fiscal",
+        "potentialSavings": "Ahorro Potencial",
+        "zeroCapGains": "0% Ganancias de Capital",
+        "zeroDividends": "0% Dividendos",
+        "countries": "países",
+        "vs": "vs",
+        "effective": "efectivo"
+    },
+    "simulator": {
+        "title": "Simulador de Inversión",
+        "capital": "Capital / Beneficio Anual (USD/EUR)",
+        "sector": "Sector",
+        "jurisdiction": "Jurisdicción",
+        "revenue": "Ingresos Anuales",
+        "costRatio": "Ratio de Costos Operativos",
+        "distribution": "Distribución de Dividendos",
+        "waterfall": "Cascada de Ganancias y Pérdidas",
+        "grossRevenue": "Ingresos Brutos",
+        "operatingCosts": "Costos Operativos",
+        "ebitda": "EBITDA",
+        "depreciation": "Depreciación",
+        "ebit": "EBIT (Beneficio Imponible)",
+        "corporateTax": "Impuesto de Sociedades",
+        "taxCredits": "Créditos Fiscales",
+        "netProfit": "Beneficio Neto",
+        "dividendTax": "Impuesto sobre Dividendos",
+        "capitalGainsTax": "Impuesto sobre Ganancias de Capital (salida)",
+        "finalProfit": "Beneficio Final Neto de Impuestos",
+        "totalTaxBurden": "Carga Fiscal Total",
+        "effectiveRate": "Tasa Efectiva",
+        "netReturn": "Retorno Neto sobre Ingresos",
+        "creditsApplied": "Créditos Fiscales Aplicados"
+    },
+    "sectors": {
+        "tech": "Tecnología y Software",
+        "techDesc": "Software, SaaS, servicios IT - Alta intensidad I+D",
+        "realEstate": "Inmobiliario",
+        "realEstateDesc": "Desarrollo inmobiliario comercial y residencial",
+        "industrial": "Industrial y Manufacturero",
+        "industrialDesc": "Manufactura, industria pesada, producción",
+        "financial": "Servicios Financieros",
+        "financialDesc": "Banca, inversión, seguros"
+    },
+    "comparison": {
+        "title": "Análisis Comparativo de Terminal",
+        "subtitle": "Comparación lado-a-lado de grado institucional",
+        "investmentAmount": "Monto de Inversión (USD)",
+        "jurisdictionA": "Jurisdicción A",
+        "jurisdictionB": "Jurisdicción B",
+        "vs": "VS",
+        "delta": "ΔDELTA",
+        "corporateTax": "Impuesto Sociedades",
+        "capitalGains": "Ganancias Capital",
+        "dividends": "Dividendos",
+        "totalBurden": "Carga Fiscal Total",
+        "effectiveRate": "Tasa Efectiva",
+        "total": "Total",
+        "taxIncentives": "Incentivos Fiscales",
+        "rdCredit": "Crédito I+D",
+        "taxTreaties": "Tratados Fiscales",
+        "withholding": "Retención",
+        "saves": "ahorra",
+        "costsMore": "cuesta más",
+        "equivalent": "Carga fiscal equivalente"
+    },
+    "table": {
+        "title": "Tabla Comparativa (Clic para ordenar)",
+        "city": "Ciudad",
+        "corporateTax": "Imp.Sociedades",
+        "capitalGains": "Gan.Capital",
+        "dividends": "Dividendos",
+        "effectiveRate": "Tasa Efectiva",
+        "totalBurden": "Carga Total"
+    },
+    "charts": {
+        "title": "Desglose de Carga Tributaria",
+        "legend": {
+            "corporateTax": "Imp.Sociedades",
+            "capitalGains": "Gan.Capital",
+            "dividends": "Dividendos"
+        }
+    },
+    "footer": {
+        "copyright": "© 2026 TaxCompass Analytics — Inteligencia fiscal basada en datos para inversores globales",
+        "sources": "Fuentes oficiales verificadas | Datos actualizados automáticamente | Información confiable para decisiones empresariales"
+    },
+    "france": {
+        "search": "Buscar empresas francesas",
+        "placeholder": "Ingrese nombre de empresa o SIREN...",
+        "searching": "Buscando...",
+        "search_button": "Buscar",
+        "taxRates": "Tasas Francia (2024/2025)",
+        "simulatorTitle": "Simulador IS",
+        "estimatedProfit": "Beneficio anual estimado (€)",
+        "estimatedTax": "Impuesto Estimado",
+        "taxFormula": "15% hasta €42.500, 25% resto"
+    }
+}

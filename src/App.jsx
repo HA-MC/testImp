@@ -1,9 +1,12 @@
 import React, { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { searchBusinesses } from './api';
 import { TAX_DATA, GLOBAL_COMPARISON, calculateCorporateTax, calculateTotalTaxBurden } from './taxEngine';
 import SideBySideComparison from './components/SideBySideComparison';
 import ProSimulator from './components/ProSimulator';
 import generateInvestmentReport from './components/ReportExporter';
+import LanguageSelector from './components/LanguageSelector';
+import './components/LanguageSelector.css';
 
 
 const TaxCard = ({ tax }) => (
@@ -127,6 +130,7 @@ const EUComparisonTable = () => {
 };
 
 const GlobalInvestorComparison = () => {
+  const { t } = useTranslation();
   const [investmentAmount, setInvestmentAmount] = useState(1000000);
   const [taxData, setTaxData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -232,13 +236,13 @@ const GlobalInvestorComparison = () => {
 
   if (loading) {
     return <div className="comparison-container" style={{ textAlign: 'center', padding: '3rem' }}>
-      <div style={{ fontSize: '1.5rem', color: 'var(--accent)' }}>⏳ Cargando datos fiscales oficiales...</div>
+      <div style={{ fontSize: '1.5rem', color: 'var(--accent)' }}>⏳ {t('dashboard.loading')}</div>
     </div>;
   }
 
   if (!taxData) {
     return <div className="comparison-container" style={{ textAlign: 'center', padding: '3rem' }}>
-      <div style={{ fontSize: '1.5rem', color: 'var(--text-muted)' }}>❌ Error cargando datos</div>
+      <div style={{ fontSize: '1.5rem', color: 'var(--text-muted)' }}>❌ {t('dashboard.error')}</div>
     </div>;
   }
 
@@ -258,18 +262,18 @@ const GlobalInvestorComparison = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
         <div>
           <h2 style={{ textAlign: 'left', marginBottom: '0.5rem', color: 'var(--accent)' }}>
-            📊 Dashboard de Análisis Fiscal Global
+            📊 {t('dashboard.title')}
           </h2>
           <p style={{ textAlign: 'left', color: 'var(--text-muted)', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
-            Métricas confiables para decisiones de inversión
+            {t('dashboard.subtitle')}
           </p>
         </div>
         <button onClick={handleExportReport} className="export-btn">
-          📄 Export PDF Report
+          {t('dashboard.exportPDF')}
         </button>
       </div>
       <div style={{ textAlign: 'center', marginBottom: '2rem', fontSize: '0.7rem', color: 'var(--text-muted)', fontStyle: 'italic' }}>
-        📅 Última actualización: {new Date(taxData.lastUpdate).toLocaleString('es-ES')}
+        📅 {t('dashboard.lastUpdate')}: {new Date(taxData.lastUpdate).toLocaleString()}
       </div>
 
       {/* KPI Dashboard */}
@@ -404,6 +408,7 @@ const GlobalInvestorComparison = () => {
 };
 
 function App() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('global');
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
@@ -443,25 +448,30 @@ function App() {
   return (
     <div className="container">
       <header>
-        <h1>TaxCompass Analytics</h1>
-        <p className="subtitle">Plataforma de análisis fiscal global para decisiones de inversión basadas en datos</p>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
+          <div style={{ flex: 1 }}>
+            <h1>{t('app.title')}</h1>
+            <p className="subtitle">{t('app.subtitle')}</p>
+          </div>
+          <LanguageSelector />
+        </div>
       </header>
 
       <div className="tab-navigation">
         <button className={`tab-btn ${activeTab === 'global' ? 'active' : ''}`} onClick={() => setActiveTab('global')}>
-          🌍 Dashboard Global
+          🌍 {t('tabs.global')}
         </button>
         <button className={`tab-btn ${activeTab === 'comparison' ? 'active' : ''}`} onClick={() => setActiveTab('comparison')}>
-          ⚡ Side-by-Side
+          ⚡ {t('tabs.sideBySide')}
         </button>
         <button className={`tab-btn ${activeTab === 'simulator' ? 'active' : ''}`} onClick={() => setActiveTab('simulator')}>
-          📊 Pro Simulator
+          📊 {t('tabs.simulator')}
         </button>
         <button className={`tab-btn ${activeTab === 'europe' ? 'active' : ''}`} onClick={() => setActiveTab('europe')}>
-          🇪🇺 Europa
+          🇪🇺 {t('tabs.europe')}
         </button>
         <button className={`tab-btn ${activeTab === 'search' ? 'active' : ''}`} onClick={() => setActiveTab('search')}>
-          🔍 Búsqueda Francia
+          🔍 {t('tabs.searchFrance')}
         </button>
       </div>
 

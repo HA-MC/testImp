@@ -16,6 +16,16 @@
   --terminal-secondary: #00d4ff;
 }
 
+/* RTL Support */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .tab-btn,
+[dir="rtl"] .lang-name {
+  text-align: center;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

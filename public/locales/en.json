@@ -1,0 +1,119 @@
+{
+    "app": {
+        "title": "TaxCompass Analytics",
+        "subtitle": "Data-driven tax intelligence platform for global investment decisions"
+    },
+    "tabs": {
+        "global": "Global Dashboard",
+        "sideBySide": "Side-by-Side",
+        "simulator": "Pro Simulator",
+        "europe": "Europe",
+        "searchFrance": "France Search"
+    },
+    "dashboard": {
+        "title": "Global Tax Analysis Dashboard",
+        "subtitle": "Reliable metrics for investment decisions",
+        "lastUpdate": "Last updated",
+        "exportPDF": "Export PDF Report",
+        "loading": "Loading official tax data...",
+        "error": "Error loading data"
+    },
+    "kpis": {
+        "lowestBurden": "Lowest Tax Burden",
+        "potentialSavings": "Potential Savings",
+        "zeroCapGains": "0% Capital Gains",
+        "zeroDividends": "0% Dividends",
+        "countries": "countries",
+        "vs": "vs",
+        "effective": "effective"
+    },
+    "simulator": {
+        "title": "Investment Simulator",
+        "capital": "Capital / Annual Profit (USD/EUR)",
+        "sector": "Sector",
+        "jurisdiction": "Jurisdiction",
+        "revenue": "Annual Revenue",
+        "costRatio": "Operating Cost Ratio",
+        "distribution": "Dividend Distribution",
+        "waterfall": "Profit & Loss Waterfall",
+        "grossRevenue": "Gross Revenue",
+        "operatingCosts": "Operating Costs",
+        "ebitda": "EBITDA",
+        "depreciation": "Depreciation",
+        "ebit": "EBIT (Taxable Profit)",
+        "corporateTax": "Corporate Tax",
+        "taxCredits": "Tax Credits",
+        "netProfit": "Net Profit",
+        "dividendTax": "Dividend Tax",
+        "capitalGainsTax": "Capital Gains Tax (on exit)",
+        "finalProfit": "Final Net-of-Tax Profit",
+        "totalTaxBurden": "Total Tax Burden",
+        "effectiveRate": "Effective Tax Rate",
+        "netReturn": "Net Return on Revenue",
+        "creditsApplied": "Tax Credits Applied"
+    },
+    "sectors": {
+        "tech": "Technology & Software",
+        "techDesc": "Software, SaaS, IT services - High R&D intensity",
+        "realEstate": "Real Estate",
+        "realEstateDesc": "Commercial & residential property development",
+        "industrial": "Industrial & Manufacturing",
+        "industrialDesc": "Manufacturing, heavy industry, production",
+        "financial": "Financial Services",
+        "financialDesc": "Banking, investment, insurance"
+    },
+    "comparison": {
+        "title": "Comparative Terminal Analysis",
+        "subtitle": "Institutional-grade side-by-side comparison",
+        "investmentAmount": "Investment Amount (USD)",
+        "jurisdictionA": "Jurisdiction A",
+        "jurisdictionB": "Jurisdiction B",
+        "vs": "VS",
+        "delta": "ΔDELTA",
+        "corporateTax": "Corporate Tax",
+        "capitalGains": "Capital Gains",
+        "dividends": "Dividends",
+        "totalBurden": "Total Tax Burden",
+        "effectiveRate": "Effective Rate",
+        "total": "Total",
+        "taxIncentives": "Tax Incentives",
+        "rdCredit": "R&D Credit",
+        "taxTreaties": "Tax Treaties",
+        "withholding": "Withholding",
+        "saves": "saves",
+        "costsMore": "costs more",
+        "equivalent": "Equivalent tax burden"
+    },
+    "table": {
+        "title": "Comparative Table (Click to sort)",
+        "city": "City",
+        "corporateTax": "Corp.Tax",
+        "capitalGains": "Cap. Gains",
+        "dividends": "Dividends",
+        "effectiveRate": "Effective Rate",
+        "totalBurden": "Total Burden"
+    },
+    "charts": {
+        "title": "Tax Burden Breakdown",
+        "legend": {
+            "corporateTax": "Corp.Tax",
+            "capitalGains": "Cap. Gains",
+            "dividends": "Dividends"
+        }
+    },
+    "footer": {
+        "copyright": "© 2026 TaxCompass Analytics — Data-driven tax intelligence for global investors",
+        "sources": "Official verified sources | Automatically updated data | Reliable information for business decisions"
+    },
+    "france": {
+        "search": "Search French businesses",
+        "placeholder": "Enter company name or SIREN...",
+        "searching": "Searching...",
+        "search_button": "Search",
+        "taxRates": "France Tax Rates (2024/2025)",
+        "simulatorTitle": "Corporate Tax Simulator",
+        "estimatedProfit": "Estimated annual profit (€)",
+        "estimatedTax": "Estimated Tax",
+        "taxFormula": "15% up to €42,500, 25% remainder"
+    }
+}
