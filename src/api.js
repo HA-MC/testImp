@@ -5,7 +5,7 @@
 
 export const searchBusinesses = async (query) => {
   if (!query || query.length < 3) return [];
-  
+
   try {
     const response = await fetch(`https://recherche-entreprises.api.gouv.fr/search?q=${encodeURIComponent(query)}&per_page=10`);
     if (!response.ok) {
