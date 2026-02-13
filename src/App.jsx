@@ -129,10 +129,20 @@ const GlobalInvestorComparison = () => {
   const [sortConfig, setSortConfig] = useState({ key: 'effectiveRate', direction: 'asc' });
 
   React.useEffect(() => {
-    fetch('/tax-data.json')
-      .then(res => res.json())
+    // Usamos la ruta de la API que definimos en server.js
+    setLoading(true);
+    fetch('/api/tax-data')
+      .then(res => {
+        if (!res.ok) throw new Error('Error en la respuesta del servidor');
+        return res.json();
+      })
       .then(data => {
-        setTaxData(data);
+        // Verificamos que los datos tengan la estructura esperada
+        if (data && data.jurisdictions) {
+          setTaxData(data);
+        } else {
+          console.error('Estructura de datos inesperada:', data);
+        }
         setLoading(false);
       })
       .catch(err => {
