@@ -49,7 +49,7 @@ app.get('/api/tax-data', (req, res) => {
 app.use(express.static(path.join(__dirname, '../dist')));
 
 // Cualquier ruta que no sea de la API servirá el index.html de tu React app
-app.get('(.*)', (req, res) => {
+app.use((req, res) => {
     res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
